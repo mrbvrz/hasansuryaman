@@ -1,11 +1,20 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-
-export default function Home() {
-  return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+import { request } from "../lib/datocms";
+const POST_QUERY = `query {
+  post {
+    id
+    title
+    content
+  }
+}`;
+export async function getStaticProps() {
+  const data = await request({
+    query: POST_QUERY,
+    // variables: { limit: 10 }
+  });
+  return {
+    props: { data }
+  };
+}
+export default function Home({ data }) {
+  return <div>{JSON.stringify(data, null, 2)}</div>;
 }
