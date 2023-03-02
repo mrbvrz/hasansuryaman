@@ -1,5 +1,4 @@
 import { request } from '../lib/datocms';
-import { Analytics } from '@vercel/analytics/react';
 
 const POST_QUERY = `query {
   post {
@@ -19,5 +18,4 @@ export async function getStaticProps() {
 }
 export default function Home({ data }) {
     return <div>{JSON.stringify(data, null, 2)}</div>;
-    <Analytics />;
 }
